@@ -22,6 +22,11 @@ export function links() {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Poppins&display=swap",
     },
+    {
+      rel: "icon",
+      href: "/logo-2.png",
+      type: "image/png",
+    },
   ];
 }
 
