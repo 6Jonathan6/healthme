@@ -11,6 +11,7 @@ module.exports = {
         "primary-action": "rgb(81, 151, 248)",
         secondary: "rgb(0, 90, 214)",
         "gray-1": "rgb(225, 225, 225)",
+        lightest: "rgb(243, 246, 250)",
       },
     },
   },
