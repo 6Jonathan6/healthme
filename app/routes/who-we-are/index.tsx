@@ -10,9 +10,9 @@ export default function Index() {
             <img src="/team/dan.jpg" />
           </div>
           <p className="font-bold mt-4 text-xl text-center">
-            Daniel Velarde
+            Daniel Martin
             <br />
-            Valdez
+            del Campo
           </p>
           <p className="font-semibold  text-xl  mt-4">Mexico</p>
           <p className="mt-4 text-base text-center">
