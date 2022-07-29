@@ -80,9 +80,6 @@ export const loader: LoaderFunction = async () => {
               gte: new Date().toISOString(),
             },
           },
-          orderBy: {
-            expire: "desc",
-          },
         },
       },
     })
