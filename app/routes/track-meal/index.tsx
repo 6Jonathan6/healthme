@@ -95,7 +95,7 @@ const TrackMeal = () => {
   const data = useLoaderData<User & { goals: Goal[]; meals: Meal[] }>();
   const minDate = new Date().toISOString().split("T")[0];
   const hasActiveGoal = true;
-  console.log(data);
+  console.log("Data", data);
   const [weight, setWeigth] = React.useState("");
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30);
