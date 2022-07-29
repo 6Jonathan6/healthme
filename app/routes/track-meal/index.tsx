@@ -41,8 +41,6 @@ const MEALS: MealProp[] = [
   },
 ];
 
-const DEFAULT_USER = 3;
-
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const timeZone = formData.get("timeZone");
@@ -72,7 +70,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export const loader: LoaderFunction = async () => {
   const user = await db.user.findUnique({
-    where: { id: DEFAULT_USER },
+    where: { id: 3 },
     include: {
       meals: true,
       goals: {
