@@ -69,22 +69,24 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const loader: LoaderFunction = async () => {
-  const user = await db.user.findUnique({
-    where: { id: 3 },
-    include: {
-      meals: true,
-      goals: {
-        where: {
-          expire: {
-            gte: new Date().toISOString(),
+  const user = await db.user
+    .findUnique({
+      where: { id: 3 },
+      include: {
+        meals: true,
+        goals: {
+          where: {
+            expire: {
+              gte: new Date().toISOString(),
+            },
+          },
+          orderBy: {
+            expire: "desc",
           },
         },
-        orderBy: {
-          expire: "desc",
-        },
       },
-    },
-  });
+    })
+    .catch((e) => json({ error: e }));
   if (!user) return null;
   return json(user);
 };
@@ -93,11 +95,7 @@ const TrackMeal = () => {
   const data = useLoaderData<User & { goals: Goal[]; meals: Meal[] }>();
   const minDate = new Date().toISOString().split("T")[0];
   const hasActiveGoal = true;
-  // const hasActiveGoal = useMemo(
-  //   () => data.goals.length > 0,
-  //   [data.goals.length]
-  // );
-
+  console.log(data);
   const [weight, setWeigth] = React.useState("");
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30);
