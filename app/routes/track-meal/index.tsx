@@ -190,7 +190,7 @@ const TrackMeal = () => {
         {hasActiveGoal && (
           <div className="w-full flex-col items-center flex-grow">
             <p className="font-bold text-xl font-popins flex w-full items-center justify-between">
-              Mis alimentos {new Date().toLocaleDateString()}
+              Mis alimentos {new Date().toLocaleDateString("es-MX")}
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 font-popins mt-8">
               {MEALS.map((meal, index) => {
