@@ -7,7 +7,7 @@ export default function Index() {
       <ul className="grid  mt-8 md:grid-cols-2 gap-4  ">
         <li className="rounded w-80 bg-white p-4 flex flex-col items-center shadow-sm">
           <div className="w-28 h-w-28 rounded-full flex flex-col items-center overflow-hidden">
-            <img src="/team/dan.jpg" />
+            <img src="/team/dan.jpg" alt="" />
           </div>
           <p className="font-bold mt-4 text-xl text-center">
             Daniel Martin
@@ -22,7 +22,7 @@ export default function Index() {
         </li>
         <li className="rounded w-80 bg-white p-4 flex flex-col items-center shadow-sm">
           <div className="w-28 h-w-28 rounded-full flex flex-col items-center overflow-hidden">
-            <img src="/team/edna.jpg" />
+            <img src="/team/edna.jpg" alt="" />
           </div>
           <p className="font-bold mt-4 text-xl text-center">
             Edna Rosales <br />
@@ -36,7 +36,7 @@ export default function Index() {
         </li>
         <li className="rounded w-80 bg-white p-4 flex flex-col items-center shadow-sm">
           <div className="w-28 h-w-28 rounded-full flex flex-col items-center overflow-hidden">
-            <img src="/team/sthephano.jpg" />
+            <img src="/team/sthephano.jpg" alt="" />
           </div>
           <p className="font-bold mt-4 text-xl text-center">
             Stephano Carlo Palomino Madueño
@@ -49,7 +49,7 @@ export default function Index() {
         </li>
         <li className="rounded w-80 bg-white p-4 flex flex-col items-center shadow-sm">
           <div className="w-28 h-w-28 rounded-full flex flex-col items-center overflow-hidden">
-            <img src="/team/jon.jpg" />
+            <img src="/team/jon.jpg" alt="" />
           </div>
           <p className="font-bold mt-4 text-xl text-center">
             Jonathan Perez <br />

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { FC, DetailedHTMLProps, ButtonHTMLAttributes } from "react";
 
 const Button: FC<
@@ -6,7 +7,10 @@ const Button: FC<
   return (
     <button
       {...rest}
-      className="px-5 py-2 bg-primary-action text-white font-popins border text-sm rounded-2xl hover:bg-secondary"
+      className={clsx(
+        "px-5 py-2 bg-primary-action text-white font-popins border text-sm rounded-xl hover:bg-secondary",
+        rest.className
+      )}
     >
       {children}
     </button>

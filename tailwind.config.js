@@ -12,6 +12,7 @@ module.exports = {
         secondary: "rgb(0, 90, 214)",
         "gray-1": "rgb(225, 225, 225)",
         lightest: "rgb(243, 246, 250)",
+        "dark-gray": "rgb(117, 117, 117)",
       },
     },
   },
