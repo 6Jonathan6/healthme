@@ -17,16 +17,20 @@ const NavItem: FC<{ to: string }> = ({ to, children }) => {
     </NavLink>
   );
 };
-const NavBar: FunctionComponent = () => {
+const NavBar: FC = ({ children }) => {
   return (
-    <nav className="p-4 flex items-center justify-center mx-auto bg-white z-50 border-b border-lightest gap-4 fixed top-0 left-0 right-0">
-      <div className="max-w-5xl hidden md:flex items-center justify-between w-full">
+    <nav className="p-4 flex items-center justify-center mx-auto z-50 border-b border-lightest gap-4 fixed top-0 left-0 right-0">
+      <div className="max-w-5xl hidden md:flex items-center w-full">
         <NavItem to="/">Home</NavItem>
         <NavItem to="/who-we-are">Quienes somos</NavItem>
         <NavItem to="/track-meal">Track meal</NavItem>
-        <Button className="ml-auto">Sign up</Button>
       </div>
-      <Button className="ml-auto md:hidden">Track meal</Button>
+      <div className="ml-auto flex gap-4">
+        {/* <Button className="ml-auto bg-white text-black border border-secondary">
+          Sign up
+        </Button> */}
+        {children}
+      </div>
     </nav>
   );
 };

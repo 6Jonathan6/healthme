@@ -8,6 +8,38 @@ import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { db } from "~/db.server";
 import { useLoaderData } from "@remix-run/react";
 import { Prisma, User, Goal, Meal } from "@prisma/client";
+import MealDetail, { Meal as MealProp } from "~/components/MealDetail";
+
+const MEALS: MealProp[] = [
+  {
+    name: "Platano",
+    carbs: 20,
+    fat: 10,
+    portion: 50,
+    protein: 15,
+  },
+  {
+    name: "Manzana",
+    carbs: 20,
+    fat: 10,
+    portion: 50,
+    protein: 15,
+  },
+  {
+    name: "Carne de res",
+    carbs: 20,
+    fat: 10,
+    portion: 50,
+    protein: 15,
+  },
+  {
+    name: "Tacos",
+    carbs: 20,
+    fat: 10,
+    portion: 50,
+    protein: 15,
+  },
+];
 
 const DEFAULT_USER = 3;
 
@@ -62,7 +94,11 @@ export const loader: LoaderFunction = async () => {
 const TrackMeal = () => {
   const data = useLoaderData<User & { goals: Goal[]; meals: Meal[] }>();
   const minDate = new Date().toISOString().split("T")[0];
-  const hasMeals = useMemo(() => data.goals.length > 0, [data.goals.length]);
+  const hasActiveGoal = true;
+  // const hasActiveGoal = useMemo(
+  //   () => data.goals.length > 0,
+  //   [data.goals.length]
+  // );
 
   const [weight, setWeigth] = React.useState("");
   const expirationDate = new Date();
@@ -94,10 +130,12 @@ const TrackMeal = () => {
   }, [calories, fat, protein, weight]);
 
   return (
-    <div className="flex flex-col items-center flex-grow p-8 pt-[68px]">
-      <NavBar />
+    <div className="flex flex-col bg-lightest items-center flex-grow p-8 pt-[68px]">
+      <NavBar>
+        <Button className="ml-auto flex-wrap">Agregar alimento</Button>
+      </NavBar>
       <div className="mt-4">
-        {!hasMeals && (
+        {!hasActiveGoal && (
           <Form method="post">
             <p className="mt-4 text-xl font-semibold">
               Calculemos tus requerimientos
@@ -148,6 +186,22 @@ const TrackMeal = () => {
             </ul>
             <Button className="mt-8 w-full">Guardar objetivos</Button>
           </Form>
+        )}
+        {hasActiveGoal && (
+          <div className="w-full flex-col items-center flex-grow">
+            <p className="font-bold text-xl font-popins flex w-full items-center justify-between">
+              Mis alimentos {new Date().toLocaleDateString()}
+            </p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 font-popins mt-8">
+              {MEALS.map((meal, index) => {
+                return (
+                  <li className="w-full" key={index}>
+                    <MealDetail {...meal} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
       </div>
     </div>

@@ -8,7 +8,7 @@ const Button: FC<
     <button
       {...rest}
       className={clsx(
-        "px-5 py-2 bg-primary-action text-white font-popins border text-sm rounded-xl hover:bg-secondary",
+        "px-5 py-2 bg-primary-action text-white font-popins truncate border text-sm rounded-xl hover:bg-secondary",
         rest.className
       )}
     >
