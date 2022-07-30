@@ -1,6 +1,11 @@
+import { useMemo } from "react";
 import NavBar from "~/components/navbar";
-
+import Whatsapp from "~/components/Whatsapp";
+import contactList from "../nutricionist.json";
 export default function Index() {
+  const contact = useMemo(() => {
+    return contactList[randomNumber(0, contactList.length)];
+  }, []);
   return (
     <div className="flex flex-col justify-center flex-grow p-8 pt-[68px]">
       <NavBar />
@@ -20,6 +25,26 @@ export default function Index() {
           </div>
         </div>
       </div>
+      <Whatsapp
+        target={"_blank"}
+        className="fixed right-0 bottom-0 mb-8 mr-8 shadow-[0_20px_20px_-10px_rgba(1,1,1,0.26)] bg-[#25d366] cursor-pointer p-4 rounded-full"
+        href={getWhatsAppUrl(
+          `Hola Doctor, ${contact.name}. Me gustaría hacerle una consulta:`,
+          contact.phone
+        )}
+      />
     </div>
   );
+}
+
+function getWhatsAppUrl(text?: string, number = "") {
+  const url = new URL(`https://wa.me/${number}`);
+  if (text) {
+    url.searchParams.set("text", text);
+  }
+  return url.toString();
+}
+
+function randomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min) + min);
 }
