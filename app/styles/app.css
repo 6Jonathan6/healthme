@@ -598,6 +598,14 @@ video {
   margin-top: 1rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -606,12 +614,8 @@ video {
   margin-top: 4rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .block {
@@ -652,6 +656,18 @@ video {
 
 .w-28 {
   width: 7rem;
+}
+
+.w-1\/3 {
+  width: 33.333333%;
+}
+
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-1\/4 {
+  width: 25%;
 }
 
 .max-w-lg {
@@ -807,13 +823,18 @@ video {
   background-color: rgb(81 151 248 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-lightest {
   --tw-bg-opacity: 1;
   background-color: rgb(243 246 250 / var(--tw-bg-opacity));
 }
 
-.bg-transparent {
-  background-color: transparent;
+.bg-blue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 246 255 / var(--tw-bg-opacity));
 }
 
 .p-8 {
@@ -864,6 +885,11 @@ video {
   line-height: 1.25rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -871,11 +897,6 @@ video {
 
 .text-lg {
   font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
   line-height: 1.75rem;
 }
 
@@ -901,9 +922,18 @@ video {
   font-weight: 400;
 }
 
+.font-light {
+  font-weight: 300;
+}
+
 .tabular-nums {
   --tw-numeric-spacing: tabular-nums;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.text-gray-1 {
+  --tw-text-opacity: 1;
+  color: rgb(225 225 225 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -919,11 +949,6 @@ video {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.text-gray-1 {
-  --tw-text-opacity: 1;
-  color: rgb(225 225 225 / var(--tw-text-opacity));
 }
 
 .shadow-lg {
@@ -1001,6 +1026,10 @@ video {
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:w-1\/3 {
+    width: 33.333333%;
   }
 
   .md\:flex-grow {

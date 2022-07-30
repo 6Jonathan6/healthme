@@ -11,6 +11,7 @@ import { User, Goal, Meal } from "@prisma/client";
 import MealDetail from "~/components/MealDetail";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch } from "react-instantsearch-hooks";
+import NewGoalForm from "~/components/NewGolForm";
 
 const searchClient = algoliasearch(
   "FC2H5CGRFB",
@@ -64,39 +65,11 @@ export const loader: LoaderFunction = async () => {
 
 const TrackMeal = () => {
   const data = useLoaderData<User & { goals: Goal[]; meals: Meal[] }>();
-  const minDate = new Date().toISOString().split("T")[0];
   const hasActiveGoal = useMemo(
     () => data.goals.length > 0,
     [data.goals.length]
   );
-  const [weight, setWeigth] = React.useState("");
-  const expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + 30);
-  const calories = useMemo(() => {
-    if (isNaN(Number(weight))) return 0;
-    const number = Number(weight);
-    const calories = 22 * number;
-    return Math.max(calories, 1600);
-  }, [weight]);
-
-  const protein = useMemo(() => {
-    if (isNaN(Number(weight))) return 0;
-    const number = Number(weight);
-    const protein = Math.ceil(2.4 * number);
-    return Math.min(protein, 200);
-  }, [weight]);
-
-  const fat = useMemo(() => {
-    if (!weight || isNaN(Number(weight))) return 0;
-    return Math.ceil(0.66 * Number(weight));
-  }, [weight]);
-
-  const carbs = useMemo(() => {
-    if (!protein || !weight || !calories || !fat) return 0;
-    const result = (calories - protein * 4 - fat * 9) / 4;
-
-    return Math.round(result);
-  }, [calories, fat, protein, weight]);
+  const hasMeals = useMemo(() => data.meals.length > 0, [data.meals.length]);
 
   return (
     <InstantSearch indexName="food_Macros" searchClient={searchClient}>
@@ -105,81 +78,47 @@ const TrackMeal = () => {
           <Button className="ml-auto flex-wrap">Agregar alimento</Button>
         </NavBar>
         <div className="mt-4">
-          {!hasActiveGoal && (
-            <Form method="post" className="bg-white">
-              <p className="mt-4 text-xl font-semibold">
-                Calculemos tus requerimientos
-              </p>
-              <div className="mt-4 flex flex-col gap-4">
-                <Input
-                  placeholder="Peso (kg)"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setWeigth(e.target.value)
-                  }
-                  inputMode="numeric"
-                />
-                <div>
-                  <label
-                    htmlFor="expiredDate"
-                    className="font-popins mb-2 block"
-                  >
-                    Expira
-                  </label>
-                  <Input
-                    name="expire"
-                    type="date"
-                    id="expiredDate"
-                    defaultValue={expirationDate.toISOString().split("T")[0]}
-                    min={minDate}
-                  />
-                  <input
-                    type={"hidden"}
-                    name="timeZone"
-                    value={(-1 * new Date().getTimezoneOffset()) / 60}
-                  />
-                  <input type={"hidden"} name="protein" value={protein} />
-                  <input type={"hidden"} name="carbs" value={carbs} />
-                  <input type={"hidden"} name="fat" value={fat} />
-                  <input type={"hidden"} name="userId" value={data.id} />
-                </div>
-              </div>
-              <ul className="flex items-center gap-3 justify-center w-full mt-8 font-popins">
-                <li>
-                  <p className="font-semibold text-gray-1 text-sm">Proteína</p>
-                  <p className="text-sm mt-2">{protein} gr</p>
-                </li>
-                <li>
-                  <p className="font-semibold text-gray-1 text-sm">Carbs.</p>
-                  <p className="text-sm mt-2">{carbs} gr</p>
-                </li>
-                <li>
-                  <p className="font-semibold text-gray-1 text-sm">Grasas</p>
-                  <p className="text-sm mt-2">{fat} gr</p>
-                </li>
-              </ul>
-              <Button className="mt-8 w-full">Guardar objetivos</Button>
-            </Form>
-          )}
+          {!hasActiveGoal && <NewGoalForm id={data.id} />}
           {hasActiveGoal && (
-            <div className="w-full flex-col items-center flex-grow">
-              <p className="font-bold text-xl font-popins flex w-full items-center justify-between">
-                Mis alimentos {new Date().toLocaleDateString("es-MX")}
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 font-popins mt-8">
-                {data.meals.map((meal, index) => {
-                  return (
-                    <li className="w-full" key={meal.id}>
-                      <MealDetail
-                        carbs={meal.carbs}
-                        fat={meal.grasa}
-                        name={meal.alimento}
-                        portion={meal.porcion}
-                        protein={meal.proteina}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
+            <div className="w-full flex-col items-center flex-grow max-w-5xl">
+              {hasMeals && (
+                <p className="font-bold text-xl font-popins flex w-full items-center justify-center">
+                  Mis alimentos
+                  <span className="font-light ml-2 ">
+                    {new Date().toLocaleDateString("es-MX")}
+                  </span>
+                </p>
+              )}
+              {!hasMeals && (
+                <p className="font-bold text-xl font-popins flex w-full items-center justify-center">
+                  Hola {data.name} registra tu primer alimento del dia
+                </p>
+              )}
+              {hasMeals && (
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 font-popins mt-8">
+                  {data.meals.map((meal) => {
+                    return (
+                      <li className="w-full" key={meal.id}>
+                        <MealDetail
+                          carbs={meal.carbs}
+                          fat={meal.grasa}
+                          name={meal.alimento}
+                          portion={meal.porcion}
+                          protein={meal.proteina}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              {!hasMeals && (
+                <div className="w-2/3 md:w-1/3  mx-auto mt-4">
+                  <img
+                    src="/empty-image.jpg"
+                    alt="Registra tu primer comida del dia"
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>
