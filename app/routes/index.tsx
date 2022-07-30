@@ -18,6 +18,18 @@ export default function Index() {
                 Stop feeling guilty for losing{" "}
                 <br className="hidden md:block" /> weight
               </span>
+              <a
+                target={"_blank"}
+                href={getWhatsAppUrl(
+                  `Hola Doctor, ${contact.name}. Me gustaría hacerle una consulta:`,
+                  contact.phone
+                )}
+                rel={"noreferrer"}
+                className="flex flex-col mt-4 justify-center items-center px-5 py-2 bg-primary-action text-white font-popins truncate border text-sm rounded-xl hover:bg-secondary"
+              >
+                <span> Panic button</span>
+                <span>Press if you need help</span>
+              </a>
             </h1>
           </div>
           <div className="md:flex-grow mt-16 md:mt-0 md:basis-2/3 flex justify-start">
@@ -25,14 +37,6 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <Whatsapp
-        target={"_blank"}
-        className="fixed right-0 bottom-0 mb-8 mr-8 shadow-[0_20px_20px_-10px_rgba(1,1,1,0.26)] bg-[#25d366] cursor-pointer p-4 rounded-full"
-        href={getWhatsAppUrl(
-          `Hola Doctor, ${contact.name}. Me gustaría hacerle una consulta:`,
-          contact.phone
-        )}
-      />
     </div>
   );
 }
