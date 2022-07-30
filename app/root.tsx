@@ -24,7 +24,7 @@ export function links() {
     },
     {
       rel: "icon",
-      href: "/logo-2.png",
+      href: "/logo-mini.png",
       type: "image/png",
     },
   ];
