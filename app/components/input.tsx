@@ -4,7 +4,7 @@ const Input: FunctionComponent<HTMLProps<HTMLInputElement>> = (props) => {
     <label className="border rounded-xl p-4 border-gray-1 flex focus-within:border-primary-action">
       <input
         {...props}
-        className="text-sm focus:outline-none focus:border-none font-popins placeholder:text-gray-1"
+        className="text-sm focus:outline-none focus:border-none font-popins bg-transparent placeholder:text-gray-1"
       />
     </label>
   );
