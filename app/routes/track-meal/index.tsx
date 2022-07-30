@@ -12,6 +12,8 @@ import MealDetail from "~/components/MealDetail";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch } from "react-instantsearch-hooks";
 import NewGoalForm from "~/components/NewGolForm";
+import { useBoolean } from "ahooks";
+import AddMeal from "~/components/AddMeal";
 
 const searchClient = algoliasearch(
   "FC2H5CGRFB",
@@ -64,6 +66,8 @@ export const loader: LoaderFunction = async () => {
 };
 
 const TrackMeal = () => {
+  const [isOpen, { setTrue: openModal, setFalse: closeModal }] =
+    useBoolean(false);
   const data = useLoaderData<User & { goals: Goal[]; meals: Meal[] }>();
   const hasActiveGoal = useMemo(
     () => data.goals.length > 0,
@@ -75,7 +79,9 @@ const TrackMeal = () => {
     <InstantSearch indexName="food_Macros" searchClient={searchClient}>
       <div className="flex flex-col bg-lightest items-center flex-grow p-8 pt-[68px]">
         <NavBar>
-          <Button className="ml-auto flex-wrap">Agregar alimento</Button>
+          <Button onClick={openModal} className="ml-auto flex-wrap">
+            Agregar alimento
+          </Button>
         </NavBar>
         <div className="mt-4">
           {!hasActiveGoal && <NewGoalForm id={data.id} />}
@@ -123,6 +129,7 @@ const TrackMeal = () => {
           )}
         </div>
       </div>
+      <AddMeal isOpen={isOpen} onClose={closeModal} />
     </InstantSearch>
   );
 };
